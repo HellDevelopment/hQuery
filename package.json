@@ -20,5 +20,8 @@
     "bugs": {
         "url": "https://github.com/HellDevelopment/hQuery/issues"
     },
-    "homepage": "https://github.com/HellDevelopment/hQuery#readme"
+    "homepage": "https://github.com/HellDevelopment/hQuery#readme",
+    "devDependencies": {
+        "prettier": "^2.5.1"
+    }
 }

@@ -32,7 +32,7 @@
  *
  */
 
-'use strict'; // https://www.w3schools.com/js/js_strict.asp
+'use strict' // https://www.w3schools.com/js/js_strict.asp
 
-import $ from './src/hQuery.js';
-export default $;
+import $ from './src/hQuery.js'
+export default $

@@ -32,21 +32,21 @@
  *
  */
 
-'use strict'; // https://www.w3schools.com/js/js_strict.asp
+'use strict' // https://www.w3schools.com/js/js_strict.asp
 
-import QueriedElement from './QueriedElement.js';
+import QueriedElement from './QueriedElement.js'
 
 class QueriedElementCollection {
     /**
      * @param {QueriedElement | HTMLElement} elements
      */
     constructor(...elements) {
-        this.length = 0;
+        this.length = 0
         for (let i = 0; i < elements.length; i += 1) {
-            this[i] = elements[i] instanceof QueriedElement ? elements[i] : new QueriedElement(elements[i]);
-            this.length++;
+            this[i] = elements[i] instanceof QueriedElement ? elements[i] : new QueriedElement(elements[i])
+            this.length++
         }
-        Object.freeze(this);
+        Object.freeze(this)
     }
 
     /**
@@ -54,7 +54,7 @@ class QueriedElementCollection {
      * @returns { QueriedElement | Null }
      */
     get(index) {
-        return this[index];
+        return this[index]
     }
 
     /**
@@ -64,49 +64,49 @@ class QueriedElementCollection {
     namedItem(name) {
         for (let i = 0; i < this.length; i++) {
             if (this[i].id === name || this[i].name === name) {
-                return this[i];
+                return this[i]
             }
         }
-        return null;
+        return null
     }
 
     /**
      * @param { Function } callback
      */
     each(callback) {
-        if (callback && typeof callback === 'function') for (let i = 0; i < this.length; i++) callback(this[i]);
+        if (callback && typeof callback === 'function') for (let i = 0; i < this.length; i++) callback(this[i])
     }
 
     /**
      * @param { Function } callback
      */
     ready(callback) {
-        window.addEventListener('DOMContentLoaded', callback);
-        return this;
+        window.addEventListener('DOMContentLoaded', callback)
+        return this
     }
 
     /**
      * @param { Function } callback
      */
     load(callback) {
-        window.addEventListener('load', callback);
-        return this;
+        window.addEventListener('load', callback)
+        return this
     }
 
     /**
      * @param { Function } callback
      */
     mouseover(callbackFunction) {
-        this.each((htmlElement) => htmlElement.mouseover(callbackFunction));
-        return this;
+        this.each(htmlElement => htmlElement.mouseover(callbackFunction))
+        return this
     }
 
     /**
      * @param { Function } callback
      */
     mouseleave(callbackFunction) {
-        this.each((htmlElement) => htmlElement.mouseleave(callbackFunction));
-        return this;
+        this.each(htmlElement => htmlElement.mouseleave(callbackFunction))
+        return this
     }
 
     /**
@@ -114,32 +114,32 @@ class QueriedElementCollection {
      * @param { Function } callback
      */
     on(event, callbackFunctionOrSelector, callbackFunction) {
-        this.each((htmlElement) => htmlElement.on(event, callbackFunctionOrSelector, callbackFunction));
-        return this;
+        this.each(htmlElement => htmlElement.on(event, callbackFunctionOrSelector, callbackFunction))
+        return this
     }
 
     /**
      * @param { String } className
      */
     removeClass(className) {
-        this.each((htmlElement) => htmlElement.removeClass(className));
-        return this;
+        this.each(htmlElement => htmlElement.removeClass(className))
+        return this
     }
 
     /**
      * @param { String } className
      */
     addClass(className) {
-        this.each((htmlElement) => htmlElement.addClass(className));
-        return this;
+        this.each(htmlElement => htmlElement.addClass(className))
+        return this
     }
 
     /**
      * @param { String } className
      */
     toggleClass(className) {
-        this.each((htmlElement) => htmlElement.toggleClass(className));
-        return this;
+        this.each(htmlElement => htmlElement.toggleClass(className))
+        return this
     }
 
     /**
@@ -147,8 +147,8 @@ class QueriedElementCollection {
      * @param { String } value
      */
     css(property, value) {
-        this.each((htmlElement) => htmlElement.css(property, value));
-        return this;
+        this.each(htmlElement => htmlElement.css(property, value))
+        return this
     }
 
     /**
@@ -156,8 +156,8 @@ class QueriedElementCollection {
      * @param { * } value
      */
     attr(attribute, value) {
-        this.each((htmlElement) => htmlElement.attr(attribute, value));
-        return this;
+        this.each(htmlElement => htmlElement.attr(attribute, value))
+        return this
     }
 
     /**
@@ -165,48 +165,48 @@ class QueriedElementCollection {
      * @param { * } value
      */
     prop(property, value) {
-        this.each((htmlElement) => htmlElement.prop(property, value));
-        return this;
+        this.each(htmlElement => htmlElement.prop(property, value))
+        return this
     }
 
     /**
      * @param { * } value
      */
     val(value) {
-        this.each((htmlElement) => htmlElement.val(value));
-        return this;
+        this.each(htmlElement => htmlElement.val(value))
+        return this
     }
 
     /**
      * @param { * } value
      */
     value(value) {
-        this.each((htmlElement) => htmlElement.value(value));
-        return this;
+        this.each(htmlElement => htmlElement.value(value))
+        return this
     }
 
     /**
      * @param { String } html
      */
     html(html) {
-        this.each((htmlElement) => htmlElement.html(html));
-        return this;
+        this.each(htmlElement => htmlElement.html(html))
+        return this
     }
 
     /**
      * @param { String } text
      */
     text(text) {
-        this.each((htmlElement) => htmlElement.text(text));
-        return this;
+        this.each(htmlElement => htmlElement.text(text))
+        return this
     }
 
     /**
      * @param { String } html
      */
     append(html) {
-        this.each((htmlElement) => htmlElement.append(html));
-        return this;
+        this.each(htmlElement => htmlElement.append(html))
+        return this
     }
 
     /**
@@ -214,9 +214,9 @@ class QueriedElementCollection {
      */
     hide(timeout = 0) {
         setTimeout(() => {
-            this.show(timeout, 'none');
-        }, timeout);
-        return this;
+            this.show(timeout, 'none')
+        }, timeout)
+        return this
     }
 
     /**
@@ -225,50 +225,50 @@ class QueriedElementCollection {
      */
     show(timeout = 0, display = 'block') {
         setTimeout(() => {
-            this.css('display', display);
-        }, timeout);
-        return this;
+            this.css('display', display)
+        }, timeout)
+        return this
     }
 
     /**
      */
     select() {
-        this.each((htmlElement) => htmlElement.select());
-        return this;
+        this.each(htmlElement => htmlElement.select())
+        return this
     }
 
     /**
      */
     focus() {
-        this.each((htmlElement) => htmlElement.focus());
-        return this;
+        this.each(htmlElement => htmlElement.focus())
+        return this
     }
 
     /**
      */
     selectAndFocus() {
-        this.select();
-        this.focus();
-        return this;
+        this.select()
+        this.focus()
+        return this
     }
 
     /**
      */
     doNothing() {
-        return this;
+        return this
     }
 
     /**
      * @param { Number } timeout in milliseconds
      */
     async wait(timeout) {
-        var coll = this;
+        var coll = this
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                resolve(coll);
-            }, timeout);
-        });
+                resolve(coll)
+            }, timeout)
+        })
     }
 }
 
-export default QueriedElementCollection;
+export default QueriedElementCollection
