@@ -32,43 +32,43 @@
  *
  */
 
-'use strict' // https://www.w3schools.com/js/js_strict.asp
+'use strict'; // https://www.w3schools.com/js/js_strict.asp
 
 export default class AjaxPromise {
     /**
      * @param { Promise } promise the promise of the ajax request
      */
     constructor(promise) {
-        this.promise = promise
+        this.promise = promise;
     }
     done(cb) {
         this.promise = this.promise.then(data => {
-            cb(data)
-            return data
-        })
-        return this
+            cb(data);
+            return data;
+        });
+        return this;
     }
     then(cb) {
         this.promise = this.promise.then(data => {
-            cb(data)
-            return data
-        })
-        return this
+            cb(data);
+            return data;
+        });
+        return this;
     }
     fail(cb) {
-        this.promise = this.promise.catch(cb)
-        return this
+        this.promise = this.promise.catch(cb);
+        return this;
     }
     catch(cb) {
-        this.promise = this.promise.catch(cb)
-        return this
+        this.promise = this.promise.catch(cb);
+        return this;
     }
     always(cb) {
-        this.promise = this.promise.finally(cb)
-        return this
+        this.promise = this.promise.finally(cb);
+        return this;
     }
     finally(cb) {
-        this.promise = this.promise.finally(cb)
-        return this
+        this.promise = this.promise.finally(cb);
+        return this;
     }
 }
