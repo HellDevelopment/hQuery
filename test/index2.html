@@ -1,8 +1,10 @@
+<!DOCTYPE html>
+<!--
 /**
  *
  * This file is part of the lucifer-morningstar.dev distribution (https://github.com/LuciferMorningstarDev or https://lucifer-morningstar.dev).
  *
- * hQuery v@VERSION | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
+ * Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,42 +35,33 @@
  */
 
 'use strict'; // https://www.w3schools.com/js/js_strict.asp
+-->
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>hQuery Testing</title>
+        <style>
+            * {
+                background: black;
+                color: white;
+            }
+        </style>
+        <link rel="stylesheet" href="./test.css" />
+        <script src="../dist/hQuery.min.js"></script>
+    </head>
+    <body>
+        <div class="clock" id="clock">
+            <span id="clock-time">00:00:00</span>
+        </div>
 
-export default class AjaxPromise {
-    /**
-     * @param { Promise } promise the promise of the ajax request
-     */
-    constructor(promise) {
-        this.promise = promise;
-    }
-    done(cb) {
-        this.promise = this.promise.then(data => {
-            cb(data);
-            return data;
-        });
-        return this;
-    }
-    then(cb) {
-        this.promise = this.promise.then(data => {
-            cb(data);
-            return data;
-        });
-        return this;
-    }
-    fail(cb) {
-        this.promise = this.promise.catch(cb);
-        return this;
-    }
-    catch(cb) {
-        this.promise = this.promise.catch(cb);
-        return this;
-    }
-    always(cb) {
-        this.promise = this.promise.finally(cb);
-        return this;
-    }
-    finally(cb) {
-        this.promise = this.promise.finally(cb);
-        return this;
-    }
-}
+        <div id="test-1" class="test"></div>
+
+        <div id="test-2" class="test"></div>
+
+        <div id="test-3" class="test"></div>
+
+        <script src="./hQueryPlain.test.js"></script>
+    </body>
+</html>

@@ -5,7 +5,11 @@
     "main": "./src/hQuery.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "prettier": "prettier --write ."
+        "prettier": "prettier --write .",
+        "build-install": "npm install && grunt",
+        "build-clean": "npm run build && npm run prettier",
+        "build": "grunt",
+        "dev": "grunt watch"
     },
     "repository": {
         "type": "git",
@@ -23,6 +27,18 @@
     },
     "homepage": "https://github.com/HellDevelopment/hQuery#readme",
     "devDependencies": {
-        "prettier": "^2.5.1"
+        "grunt": "^1.4.1",
+        "grunt-compare-size": "^0.4.2",
+        "grunt-complexity": "^1.1.0",
+        "grunt-contrib-uglify-es": "^3.3.0",
+        "grunt-contrib-watch": "^1.1.0",
+        "grunt-eslint": "^24.0.0",
+        "grunt-git-authors": "^3.2.0",
+        "grunt-jsonlint": "^1.1.0",
+        "grunt-npmcopy": "^0.2.0",
+        "gzip-js": "^0.3.2",
+        "load-grunt-tasks": "^5.1.0",
+        "prettier": "^2.5.1",
+        "rollup": "^2.67.3"
     }
 }

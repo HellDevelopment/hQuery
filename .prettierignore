@@ -1,1 +1,12 @@
 node_modules
+
+dist/hQuery.min.js
+dist/hQuery.min.map
+
+build/.sizecache.json
+
+package-lock.json
+
+README.md
+LICENSE.md
+LICENSE.txt

@@ -32,43 +32,26 @@
  *
  */
 
-'use strict'; // https://www.w3schools.com/js/js_strict.asp
+(function (global, factory) {
+    'use strict'; // https://www.w3schools.com/js/js_strict.asp
+    if (typeof module === 'object' && typeof module.exports === 'object') {
+        module.exports = global.document
+            ? factory(global, true)
+            : function (window) {
+                  if (!window.document) {
+                      throw new Error('hQuery requires a window with a document');
+                  }
+                  return factory(window);
+              };
+    } else {
+        factory(global);
+    }
+})(typeof window !== 'undefined' ? window : this, function (window, noGlobal) {
+    'use strict';
 
-export default class AjaxPromise {
-    /**
-     * @param { Promise } promise the promise of the ajax request
-     */
-    constructor(promise) {
-        this.promise = promise;
-    }
-    done(cb) {
-        this.promise = this.promise.then(data => {
-            cb(data);
-            return data;
-        });
-        return this;
-    }
-    then(cb) {
-        this.promise = this.promise.then(data => {
-            cb(data);
-            return data;
-        });
-        return this;
-    }
-    fail(cb) {
-        this.promise = this.promise.catch(cb);
-        return this;
-    }
-    catch(cb) {
-        this.promise = this.promise.catch(cb);
-        return this;
-    }
-    always(cb) {
-        this.promise = this.promise.finally(cb);
-        return this;
-    }
-    finally(cb) {
-        this.promise = this.promise.finally(cb);
-        return this;
-    }
-}
+    // @CODE
+
+    window['$'] = hQuery;
+    window['hQuery'] = hQuery;
+    return hQuery;
+});
