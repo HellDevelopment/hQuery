@@ -753,6 +753,24 @@
     if (typeof window === 'undefined' || typeof document === 'undefined' || typeof window.document === 'undefined')
         throw new Error(`Missing scopes...  'window': ${typeof window !== 'undefined'} , 'window.document':  ${typeof window.document !== 'undefined'}, 'document':  ${typeof document !== 'undefined'}`);
 
+    // Regex to validate html
+    const htmlRegex =
+        /<(br|basefont|hr|input|source|frame|param|area|meta|!--|col|link|option|base|img|wbr|!DOCTYPE).*?>|<(a|abbr|acronym|address|applet|article|aside|audio|b|bdi|bdo|big|blockquote|body|button|canvas|caption|center|cite|code|colgroup|command|datalist|dd|del|details|dfn|dialog|dir|div|dl|dt|em|embed|fieldset|figcaption|figure|font|footer|form|frameset|head|header|hgroup|h1|h2|h3|h4|h5|h6|html|i|iframe|ins|kbd|keygen|label|legend|li|map|mark|menu|meter|nav|noframes|noscript|object|ol|optgroup|output|p|pre|progress|q|rp|rt|ruby|s|samp|script|section|select|small|span|strike|strong|style|sub|summary|sup|table|tbody|td|textarea|tfoot|th|thead|time|title|tr|track|tt|u|ul|var|video).*?<\/\2>/i;
+
+    /**
+     * Test if an element given by string is valid html by using DOMParser and Regex
+     * @param { String } name
+     * @returns { Boolean } isValidHtml
+     */
+    function isHTML(input) {
+        try {
+            var doc = new DOMParser().parseFromString(input, 'text/html');
+            return Array.from(doc.body.childNodes).some(node => node.nodeType === 1) && htmlRegex.test(input);
+        } catch (error) {
+            return false;
+        }
+    }
+
     /**
      * @param {HTMLElement | Function | String | Array<HTMLElement>} elementsOrFunctionOrSelector
      * @returns {QueriedElement | QueriedElementCollection<QueriedElement>} collectionOrElement
@@ -771,6 +789,11 @@
 
         if (typeof elementsOrFunctionOrSelector[0] === 'string') {
             var selector = elementsOrFunctionOrSelector[0];
+
+            if (isHTML(selector)) {
+                return new QueriedElement(document.createElement('div')).html(selector);
+            }
+
             if (selector.startsWith('!')) {
                 return new QueriedElementCollection(...document.querySelectorAll(selector.substring(1).trimStart()));
             } else return new QueriedElement(document.querySelector(selector));
@@ -790,6 +813,9 @@
             hQuery[name] = value;
         } else throw new Error(`Cannot append hQuery by '${name}' this property exists`);
     };
+
+    hQuery.htmlRegex = htmlRegex;
+    hQuery.isHTML = isHTML;
 
     /**
      * @param {*} check
