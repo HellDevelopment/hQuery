@@ -1,6 +1,6 @@
 {
     "name": "hquery.js",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "hQuery is a lightweight jQuery alternative",
     "main": "./src/hQuery.js",
     "scripts": {
