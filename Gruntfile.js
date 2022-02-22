@@ -34,10 +34,9 @@
 
 'use strict'; // https://www.w3schools.com/js/js_strict.asp
 
-module.exports = grunt => {
+module.exports = (grunt) => {
     var fs = require('fs');
     var gzip = require('gzip-js');
-    var CLIEngine = require('eslint').CLIEngine;
 
     var stripJSONComments = require('strip-json-comments');
 
@@ -100,6 +99,12 @@ module.exports = grunt => {
             prior: ['LuciferMorningstarDev <contact@lucifer-morningstar.dev>'],
             order: 'count'
         },
+        eslint: {
+            options: {
+                overrideConfigFile: './.eslintrc.json'
+            },
+            target: ['src/*.js', 'src/types/*.js']
+        },
         watch: {
             files: ['src/**/*.js'],
             tasks: ['uglify', 'compare_size']
@@ -108,6 +113,29 @@ module.exports = grunt => {
             all: {
                 dest: 'dist/hQuery.js',
                 included: ['hQuery']
+            }
+        },
+        sass: {
+            dist: {
+                options: {
+                    style: 'expanded'
+                },
+                files: {
+                    'dist/styles/alert.css': 'src/scss/alert.scss'
+                }
+            }
+        },
+        cssmin: {
+            target: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'dist/styles',
+                        src: ['*.css', '!*.min.css'],
+                        dest: 'dist/styles',
+                        ext: '.min.css'
+                    }
+                ]
             }
         },
         uglify: {
@@ -146,9 +174,7 @@ module.exports = grunt => {
 
     // Load grunt tasks from NPM packages
     require('load-grunt-tasks')(grunt);
-
-    // Integrate Vextension-Web special tasks
     grunt.loadTasks('build/tasks');
 
-    grunt.registerTask('default', ['build:*:*', 'uglify', 'compare_size', 'update-authors']);
+    grunt.registerTask('default', ['eslint', 'build:*:*', 'sass', 'cssmin', 'uglify', 'compare_size', 'update-authors']);
 };

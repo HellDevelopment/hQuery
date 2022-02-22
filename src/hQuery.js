@@ -54,7 +54,7 @@ const htmlRegex =
 function isHTML(input) {
     try {
         var doc = new DOMParser().parseFromString(input, 'text/html');
-        return Array.from(doc.body.childNodes).some(node => node.nodeType === 1) && htmlRegex.test(input);
+        return Array.from(doc.body.childNodes).some((node) => node.nodeType === 1) && htmlRegex.test(input);
     } catch (error) {
         return false;
     }
@@ -110,31 +110,31 @@ hQuery.isHTML = isHTML;
  * @param {*} check
  * @returns { Boolean } if the given to check variable s an empty object
  */
-hQuery.isEmptyObject = check => typeof check === 'object' && check !== null && Object.keys(check).length <= 0;
+hQuery.isEmptyObject = (check) => typeof check === 'object' && check !== null && Object.keys(check).length <= 0;
 
 /**
  * @param {*} check
  * @returns { Boolean } if the given to check variable is a plain object ( To check if its empty use hQuery.isEmptyObject(check) )
  */
-hQuery.isPlainObject = check => typeof check === 'object';
+hQuery.isPlainObject = (check) => typeof check === 'object';
 
 /**
  * @param {*} check
  * @returns { Boolean } if the given to check variable is an array
  */
-hQuery.isArray = check => Array.isArray(check);
+hQuery.isArray = (check) => Array.isArray(check);
 
 /**
  * @param {*} check
  * @returns { Boolean } if the given to check variable is a function
  */
-hQuery.isFunction = check => typeof check === 'function';
+hQuery.isFunction = (check) => typeof check === 'function';
 
 /**
  * @param {*} check
  * @returns { Boolean } if the given to check variable is not null (check !== null && check !== undefined)
  */
-hQuery.isNotNull = check => check !== null && check !== undefined;
+hQuery.isNotNull = (check) => check !== null && check !== undefined;
 
 /**
  * @param { String } url
@@ -154,18 +154,18 @@ hQuery.getJSON = (url, headers = {}, query = {}, success = () => {}, dataType = 
             method: 'GET',
             headers: headers
         })
-            .then(res => {
+            .then((res) => {
                 if (res.ok) {
                     return res.json();
                 } else {
                     throw new Error('Status Error: ' + res.status);
                 }
             })
-            .then(data => {
+            .then((data) => {
                 success(data);
                 return data;
             })
-            .catch(error => {
+            .catch((error) => {
                 throw new Error(error);
             })
     );
@@ -181,11 +181,11 @@ hQuery.get = (url, options = {}, success = () => {}) => {
     options.method = 'GET';
     return new AjaxPromise(
         fetch(url, options)
-            .then(response => {
+            .then((response) => {
                 success(response);
                 return response;
             })
-            .catch(error => {
+            .catch((error) => {
                 throw new Error(error);
             })
     );
@@ -201,11 +201,11 @@ hQuery.post = (url, options = {}, success = () => {}) => {
     options.method = 'POST';
     return new AjaxPromise(
         fetch(url, options)
-            .then(response => {
+            .then((response) => {
                 success(response);
                 return response;
             })
-            .catch(error => {
+            .catch((error) => {
                 throw new Error(error);
             })
     );
@@ -222,7 +222,7 @@ hQuery.postFormData = (url, formData = {}, options = {}, success = () => {}) => 
     if (hQuery.isPlainObject(formData)) {
         function getFormData(object) {
             const formData = new FormData();
-            Object.keys(object).forEach(key => formData.append(key, object[key]));
+            Object.keys(object).forEach((key) => formData.append(key, object[key]));
             return formData;
         }
         formData = getFormData(formData);
@@ -232,11 +232,11 @@ hQuery.postFormData = (url, formData = {}, options = {}, success = () => {}) => 
     options.body = formData;
     return new AjaxPromise(
         fetch(url, options)
-            .then(response => {
+            .then((response) => {
                 success(response);
                 return response;
             })
-            .catch(error => {
+            .catch((error) => {
                 throw new Error(error);
             })
     );

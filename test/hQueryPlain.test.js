@@ -121,7 +121,7 @@ $(async () => {
     console.log('============================================================================');
 
     var startTime = () => {
-        var pad = n => ('00' + n).substring(('' + n).length);
+        var pad = (n) => ('00' + n).substring(('' + n).length);
         const today = new Date();
         let h = today.getHours();
         let m = today.getMinutes();

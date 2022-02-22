@@ -3,6 +3,9 @@ node_modules
 dist/hQuery.min.js
 dist/hQuery.min.map
 
+dist/styles/alert.css.map
+dist/styles/alert.min.css
+
 build/.sizecache.json
 
 package-lock.json

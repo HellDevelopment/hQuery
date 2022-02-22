@@ -158,13 +158,13 @@ class QueriedElement {
      */
     css(property, value) {
         function addProperty(element, prop, val) {
-            const camelProp = prop.replace(/(-[a-z])/, g => {
+            const camelProp = prop.replace(/(-[a-z])/, (g) => {
                 return g.replace('-', '').toUpperCase();
             });
             element.style[camelProp] = val;
         }
         if (typeof property === 'object' && property !== null) {
-            Object.keys(property).forEach(cssProperty => {
+            Object.keys(property).forEach((cssProperty) => {
                 addProperty(this.htmlElement, cssProperty, property[cssProperty]);
             });
             return this;
@@ -284,7 +284,7 @@ class QueriedElement {
      */
     async wait(timeout) {
         var queried = this;
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             setTimeout(() => {
                 resolve(queried);
             }, timeout);

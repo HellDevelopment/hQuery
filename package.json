@@ -30,6 +30,8 @@
         "grunt": "^1.4.1",
         "grunt-compare-size": "^0.4.2",
         "grunt-complexity": "^1.1.0",
+        "grunt-contrib-cssmin": "^4.0.0",
+        "grunt-contrib-sass": "^2.0.0",
         "grunt-contrib-uglify-es": "^3.3.0",
         "grunt-contrib-watch": "^1.1.0",
         "grunt-eslint": "^24.0.0",

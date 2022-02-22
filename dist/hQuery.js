@@ -46,7 +46,7 @@
     } else {
         factory(global);
     }
-})(typeof window !== 'undefined' ? window : this, function (window, noGlobal) {
+})(typeof window !== 'undefined' ? window : this, function (window) {
     'use strict';
 
     /**
@@ -91,14 +91,14 @@
             this.promise = promise;
         }
         done(cb) {
-            this.promise = this.promise.then(data => {
+            this.promise = this.promise.then((data) => {
                 cb(data);
                 return data;
             });
             return this;
         }
         then(cb) {
-            this.promise = this.promise.then(data => {
+            this.promise = this.promise.then((data) => {
                 cb(data);
                 return data;
             });
@@ -280,13 +280,13 @@
          */
         css(property, value) {
             function addProperty(element, prop, val) {
-                const camelProp = prop.replace(/(-[a-z])/, g => {
+                const camelProp = prop.replace(/(-[a-z])/, (g) => {
                     return g.replace('-', '').toUpperCase();
                 });
                 element.style[camelProp] = val;
             }
             if (typeof property === 'object' && property !== null) {
-                Object.keys(property).forEach(cssProperty => {
+                Object.keys(property).forEach((cssProperty) => {
                     addProperty(this.htmlElement, cssProperty, property[cssProperty]);
                 });
                 return this;
@@ -406,7 +406,7 @@
          */
         async wait(timeout) {
             var queried = this;
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve) => {
                 setTimeout(() => {
                     resolve(queried);
                 }, timeout);
@@ -509,7 +509,7 @@
          * @param { Function } callback
          */
         mouseover(callbackFunction) {
-            this.each(htmlElement => htmlElement.mouseover(callbackFunction));
+            this.each((htmlElement) => htmlElement.mouseover(callbackFunction));
             return this;
         }
 
@@ -517,7 +517,7 @@
          * @param { Function } callback
          */
         mouseleave(callbackFunction) {
-            this.each(htmlElement => htmlElement.mouseleave(callbackFunction));
+            this.each((htmlElement) => htmlElement.mouseleave(callbackFunction));
             return this;
         }
 
@@ -550,7 +550,7 @@
          * @param { Function } callback
          */
         on(event, callback) {
-            this.each(htmlElement => htmlElement.on(event, callback));
+            this.each((htmlElement) => htmlElement.on(event, callback));
             return this;
         }
 
@@ -566,7 +566,7 @@
          * @param { String } className
          */
         removeClass(className) {
-            this.each(htmlElement => htmlElement.removeClass(className));
+            this.each((htmlElement) => htmlElement.removeClass(className));
             return this;
         }
 
@@ -574,7 +574,7 @@
          * @param { String } className
          */
         addClass(className) {
-            this.each(htmlElement => htmlElement.addClass(className));
+            this.each((htmlElement) => htmlElement.addClass(className));
             return this;
         }
 
@@ -582,7 +582,7 @@
          * @param { String } className
          */
         toggleClass(className) {
-            this.each(htmlElement => htmlElement.toggleClass(className));
+            this.each((htmlElement) => htmlElement.toggleClass(className));
             return this;
         }
 
@@ -591,7 +591,7 @@
          * @param { String } value
          */
         css(property, value) {
-            this.each(htmlElement => htmlElement.css(property, value));
+            this.each((htmlElement) => htmlElement.css(property, value));
             return this;
         }
 
@@ -600,7 +600,7 @@
          * @param { * } value
          */
         attr(attribute, value) {
-            this.each(htmlElement => htmlElement.attr(attribute, value));
+            this.each((htmlElement) => htmlElement.attr(attribute, value));
             return this;
         }
 
@@ -609,7 +609,7 @@
          * @param { * } value
          */
         prop(property, value) {
-            this.each(htmlElement => htmlElement.prop(property, value));
+            this.each((htmlElement) => htmlElement.prop(property, value));
             return this;
         }
 
@@ -617,7 +617,7 @@
          * @param { * } value
          */
         val(value) {
-            this.each(htmlElement => htmlElement.val(value));
+            this.each((htmlElement) => htmlElement.val(value));
             return this;
         }
 
@@ -625,7 +625,7 @@
          * @param { * } value
          */
         value(value) {
-            this.each(htmlElement => htmlElement.value(value));
+            this.each((htmlElement) => htmlElement.value(value));
             return this;
         }
 
@@ -633,7 +633,7 @@
          * @param { String } html
          */
         html(html) {
-            this.each(htmlElement => htmlElement.html(html));
+            this.each((htmlElement) => htmlElement.html(html));
             return this;
         }
 
@@ -641,7 +641,7 @@
          * @param { String } text
          */
         text(text) {
-            this.each(htmlElement => htmlElement.text(text));
+            this.each((htmlElement) => htmlElement.text(text));
             return this;
         }
 
@@ -649,7 +649,7 @@
          * @param { String } html
          */
         append(html) {
-            this.each(htmlElement => htmlElement.append(html));
+            this.each((htmlElement) => htmlElement.append(html));
             return this;
         }
 
@@ -677,14 +677,14 @@
         /**
          */
         select() {
-            this.each(htmlElement => htmlElement.select());
+            this.each((htmlElement) => htmlElement.select());
             return this;
         }
 
         /**
          */
         focus() {
-            this.each(htmlElement => htmlElement.focus());
+            this.each((htmlElement) => htmlElement.focus());
             return this;
         }
 
@@ -706,10 +706,10 @@
          * @param { Number } timeout in milliseconds
          */
         async wait(timeout) {
-            var coll = this;
-            return new Promise((resolve, reject) => {
+            var queried = this;
+            return new Promise((resolve) => {
                 setTimeout(() => {
-                    resolve(coll);
+                    resolve(queried);
                 }, timeout);
             });
         }
@@ -765,7 +765,7 @@
     function isHTML(input) {
         try {
             var doc = new DOMParser().parseFromString(input, 'text/html');
-            return Array.from(doc.body.childNodes).some(node => node.nodeType === 1) && htmlRegex.test(input);
+            return Array.from(doc.body.childNodes).some((node) => node.nodeType === 1) && htmlRegex.test(input);
         } catch (error) {
             return false;
         }
@@ -821,31 +821,31 @@
      * @param {*} check
      * @returns { Boolean } if the given to check variable s an empty object
      */
-    hQuery.isEmptyObject = check => typeof check === 'object' && check !== null && Object.keys(check).length <= 0;
+    hQuery.isEmptyObject = (check) => typeof check === 'object' && check !== null && Object.keys(check).length <= 0;
 
     /**
      * @param {*} check
      * @returns { Boolean } if the given to check variable is a plain object ( To check if its empty use hQuery.isEmptyObject(check) )
      */
-    hQuery.isPlainObject = check => typeof check === 'object';
+    hQuery.isPlainObject = (check) => typeof check === 'object';
 
     /**
      * @param {*} check
      * @returns { Boolean } if the given to check variable is an array
      */
-    hQuery.isArray = check => Array.isArray(check);
+    hQuery.isArray = (check) => Array.isArray(check);
 
     /**
      * @param {*} check
      * @returns { Boolean } if the given to check variable is a function
      */
-    hQuery.isFunction = check => typeof check === 'function';
+    hQuery.isFunction = (check) => typeof check === 'function';
 
     /**
      * @param {*} check
      * @returns { Boolean } if the given to check variable is not null (check !== null && check !== undefined)
      */
-    hQuery.isNotNull = check => check !== null && check !== undefined;
+    hQuery.isNotNull = (check) => check !== null && check !== undefined;
 
     /**
      * @param { String } url
@@ -865,18 +865,18 @@
                 method: 'GET',
                 headers: headers
             })
-                .then(res => {
+                .then((res) => {
                     if (res.ok) {
                         return res.json();
                     } else {
                         throw new Error('Status Error: ' + res.status);
                     }
                 })
-                .then(data => {
+                .then((data) => {
                     success(data);
                     return data;
                 })
-                .catch(error => {
+                .catch((error) => {
                     throw new Error(error);
                 })
         );
@@ -892,11 +892,11 @@
         options.method = 'GET';
         return new AjaxPromise(
             fetch(url, options)
-                .then(response => {
+                .then((response) => {
                     success(response);
                     return response;
                 })
-                .catch(error => {
+                .catch((error) => {
                     throw new Error(error);
                 })
         );
@@ -912,11 +912,11 @@
         options.method = 'POST';
         return new AjaxPromise(
             fetch(url, options)
-                .then(response => {
+                .then((response) => {
                     success(response);
                     return response;
                 })
-                .catch(error => {
+                .catch((error) => {
                     throw new Error(error);
                 })
         );
@@ -933,7 +933,7 @@
         if (hQuery.isPlainObject(formData)) {
             function getFormData(object) {
                 const formData = new FormData();
-                Object.keys(object).forEach(key => formData.append(key, object[key]));
+                Object.keys(object).forEach((key) => formData.append(key, object[key]));
                 return formData;
             }
             formData = getFormData(formData);
@@ -943,11 +943,11 @@
         options.body = formData;
         return new AjaxPromise(
             fetch(url, options)
-                .then(response => {
+                .then((response) => {
                     success(response);
                     return response;
                 })
-                .catch(error => {
+                .catch((error) => {
                     throw new Error(error);
                 })
         );

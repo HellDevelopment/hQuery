@@ -39,11 +39,11 @@ const { resolve } = path;
 const fs = require('fs');
 const rollup = require('rollup');
 
-module.exports = grunt => {
+module.exports = (grunt) => {
     const inputFileName = 'hQuery.js';
     const srcFolder = path.resolve(`${__dirname}/../../src`);
 
-    const read = fileName => {
+    const read = (fileName) => {
         return grunt.file.read(`${srcFolder}/${fileName}`);
     };
 
@@ -61,7 +61,7 @@ module.exports = grunt => {
 
     const fileOverrides = new Map();
 
-    const getOverride = filePath => {
+    const getOverride = (filePath) => {
         return fileOverrides.get(path.resolve(filePath));
     };
 
@@ -87,7 +87,7 @@ module.exports = grunt => {
                     inputRollupOptions.input,
                     getOverride(inputRollupOptions.input) +
                         included
-                            .map(module => `import "./${module}.js";`)
+                            .map((module) => `import "./${module}.js";`)
                             .join('\n')
                             .replace(/export\C+;/g, '')
                 );
