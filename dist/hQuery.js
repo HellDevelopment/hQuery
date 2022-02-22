@@ -197,7 +197,7 @@
          * @param { Function } callback
          */
         mouseover(callback) {
-            this.htmlElement.on('mouseover', callback);
+            this.on('mouseover', callback);
             return this;
         }
 
@@ -205,17 +205,49 @@
          * @param { Function } callback
          */
         mouseleave(callback) {
-            this.htmlElement.on('mouseleave', callback);
+            this.on('mouseleave', callback);
             return this;
         }
 
         /**
-         * @param { Event } event
+         * @param { Function } callback
+         */
+        click(callback) {
+            this.on('click', callback);
+            return this;
+        }
+
+        /**
+         * @param { Function } callback
+         */
+        keyup(callback) {
+            this.on('keyup', callback);
+            return this;
+        }
+
+        /**
+         * @param { Function } callback
+         */
+        keydown(callback) {
+            this.on('keydown', callback);
+            return this;
+        }
+
+        /**
+         * @param { String } event
          * @param { Function } callback
          */
         on(event, callback) {
             this.htmlElement.addEventListener(event, callback);
             return this;
+        }
+
+        /**
+         * @param { String } event
+         * @param { Function } callback
+         */
+        addEventListener(event, callback) {
+            return this.on(event, callback);
         }
 
         /**
@@ -490,12 +522,44 @@
         }
 
         /**
-         * @param { Event } event
          * @param { Function } callback
          */
-        on(event, callbackFunctionOrSelector, callbackFunction) {
-            this.each(htmlElement => htmlElement.on(event, callbackFunctionOrSelector, callbackFunction));
+        click(callback) {
+            this.on('click', callback);
             return this;
+        }
+
+        /**
+         * @param { Function } callback
+         */
+        keyup(callback) {
+            this.on('keyup', callback);
+            return this;
+        }
+
+        /**
+         * @param { Function } callback
+         */
+        keydown(callback) {
+            this.on('keydown', callback);
+            return this;
+        }
+
+        /**
+         * @param { String } event
+         * @param { Function } callback
+         */
+        on(event, callback) {
+            this.each(htmlElement => htmlElement.on(event, callback));
+            return this;
+        }
+
+        /**
+         * @param { String } event
+         * @param { Function } callback
+         */
+        addEventListener(event, callback) {
+            return this.on(event, callback);
         }
 
         /**

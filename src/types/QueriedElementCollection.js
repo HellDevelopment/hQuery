@@ -110,12 +110,44 @@ class QueriedElementCollection {
     }
 
     /**
-     * @param { Event } event
      * @param { Function } callback
      */
-    on(event, callbackFunctionOrSelector, callbackFunction) {
-        this.each(htmlElement => htmlElement.on(event, callbackFunctionOrSelector, callbackFunction));
+    click(callback) {
+        this.on('click', callback);
         return this;
+    }
+
+    /**
+     * @param { Function } callback
+     */
+    keyup(callback) {
+        this.on('keyup', callback);
+        return this;
+    }
+
+    /**
+     * @param { Function } callback
+     */
+    keydown(callback) {
+        this.on('keydown', callback);
+        return this;
+    }
+
+    /**
+     * @param { String } event
+     * @param { Function } callback
+     */
+    on(event, callback) {
+        this.each(htmlElement => htmlElement.on(event, callback));
+        return this;
+    }
+
+    /**
+     * @param { String } event
+     * @param { Function } callback
+     */
+    addEventListener(event, callback) {
+        return this.on(event, callback);
     }
 
     /**
