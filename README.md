@@ -20,6 +20,8 @@
 
 - [Shorthand Methods](#shorthand-methods)
 
+- [hQuery Alerts](#hquery-alerts)
+
 ---
 
 ```js
@@ -251,5 +253,36 @@ if (!myCookie) {
 }
 // delete/invalidate a cookie ( set a new value and invalidate with a new time set to -1 days )
 $.cookie('_myCookie', null, -1); 
+
+```
+
+
+#### hQuery Alerts
+
+[Navigate Through](#navigate-through)
+
+- import alerts css first
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hquery.js@latest/dist/styles/alert.min.css">
+```
+
+```js
+
+import "hquery.js/dist/styles/alert.css";
+import "hquery.js/src/scss/alert.scss";
+
+// send closeable alert messages if they aren't closed by user they dismiss after 10 seconds... they're displayed at the bottom right of the page
+
+// dark / light / glassmorphism-dark / glassmorphism-light
+var theme = "dark"; // default is glassmorphism-light
+// warning / success / info / primary / error
+var kind = "primary"; // default is primary
+$.alert(kind, "This is my nice message", "theme");
+$.alert.info('This is a info alert', theme);
+$.alert.success('This is a success alert', theme);
+$.alert.warning('This is a warning alert', theme);
+$.alert.error('This is a error alert', theme);
+$.alert.primary('This is a primary alert', theme);
 
 ```
