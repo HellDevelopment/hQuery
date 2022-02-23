@@ -38,15 +38,24 @@ import QueriedElement from './QueriedElement.js';
 
 class QueriedElementCollection {
     /**
-     * @param {QueriedElement | HTMLElement} elements
+     * @param {QueriedElement | HTMLElement | QueriedElementCollection } elements
      */
     constructor(...elements) {
         this.length = 0;
         for (let i = 0; i < elements.length; i += 1) {
-            this[i] = elements[i] instanceof QueriedElement ? elements[i] : new QueriedElement(elements[i]);
-            this.length++;
+            if (elements[i] instanceof QueriedElement) {
+                this[i] = elements[i];
+                this.length++;
+            } else if (elements[i] instanceof QueriedElementCollection) {
+                elements[i].each((element) => {
+                    this[i] = element;
+                    this.length++;
+                });
+            } else {
+                this[i] = new QueriedElement(elements[i]);
+                this.length++;
+            }
         }
-        Object.freeze(this);
     }
 
     /**
@@ -54,7 +63,7 @@ class QueriedElementCollection {
      * @returns { QueriedElement | Null }
      */
     get(index) {
-        return this[index];
+        return this[index] != null ? this[index] : null;
     }
 
     /**
@@ -78,7 +87,100 @@ class QueriedElementCollection {
     }
 
     /**
+     * @returns { Array<QueriedElement> }
+     */
+    array() {
+        let tmpArr = [];
+        for (let i = 0; i < this.length; i++) {
+            tmpArr.push(this[i]);
+        }
+        return tmpArr;
+    }
+
+    /**
+     * @param { HTMLElement | QueriedElement | QueriedElementCollection } elements
+     * @returns { QueriedElementCollection }
+     */
+    add(...elements) {
+        let indexAdd = 0;
+        elements.forEach((element) => {
+            if (element instanceof QueriedElementCollection) {
+                for (let i = 0; i < element.length; i++) {
+                    this[this.length + indexAdd] = element[i];
+                    indexAdd++;
+                }
+            } else if (element instanceof QueriedElement) {
+                this[this.length + indexAdd] = element;
+                indexAdd++;
+            } else {
+                this[this.length + indexAdd] = new QueriedElement(element);
+                indexAdd++;
+            }
+        });
+        this.length += indexAdd;
+        return this;
+    }
+
+    /**
+     * @param { QueriedElement } elements
+     * @returns { QueriedElementCollection }
+     */
+    remove(...elements) {
+        var tmpElements = this.array();
+        for (let i = 0; i < this.length; i++) {
+            delete this[i];
+        }
+        elements.forEach((el) => {
+            tmpElements.remove(el);
+        });
+        let index = 0;
+        tmpElements.forEach((element) => {
+            if (element != null) {
+                this[index] = element;
+                index++;
+            }
+        });
+        this.length = this[0] != null ? index + 1 : 0;
+        return this;
+    }
+
+    /**
      * @param { Function } callback
+     * @returns { QueriedElementCollection }
+     */
+    map(callback) {
+        return new QueriedElementCollection(...this.array().map(callback));
+    }
+
+    /**
+     * @param { Function } callback
+     * @returns { QueriedElementCollection }
+     */
+    filter(callback) {
+        return new QueriedElementCollection(...this.array().filter(callback));
+    }
+
+    /**
+     * @param { Function } callback
+     * @param { * } thisArg
+     * @returns { QueriedElementCollection }
+     */
+    some(callback, thisArg) {
+        return new QueriedElementCollection(...this.array().some(callback, thisArg));
+    }
+
+    /**
+     * @param { Function } callback
+     * @param { * } initialValue
+     * @returns { QueriedElementCollection }
+     */
+    reduce(callback, initialValue = 0) {
+        return new QueriedElementCollection(...this.array().reduce(callback, initialValue));
+    }
+
+    /**
+     * @param { Function } callback
+     * @returns { QueriedElementCollection }
      */
     ready(callback) {
         window.addEventListener('DOMContentLoaded', callback);
@@ -87,6 +189,7 @@ class QueriedElementCollection {
 
     /**
      * @param { Function } callback
+     * @returns { QueriedElementCollection }
      */
     load(callback) {
         window.addEventListener('load', callback);
@@ -95,6 +198,7 @@ class QueriedElementCollection {
 
     /**
      * @param { Function } callback
+     * @returns { QueriedElementCollection }
      */
     mouseover(callbackFunction) {
         this.each((htmlElement) => htmlElement.mouseover(callbackFunction));
@@ -103,6 +207,7 @@ class QueriedElementCollection {
 
     /**
      * @param { Function } callback
+     * @returns { QueriedElementCollection }
      */
     mouseleave(callbackFunction) {
         this.each((htmlElement) => htmlElement.mouseleave(callbackFunction));
@@ -111,6 +216,7 @@ class QueriedElementCollection {
 
     /**
      * @param { Function } callback
+     * @returns { QueriedElementCollection }
      */
     click(callback) {
         this.on('click', callback);
@@ -119,6 +225,7 @@ class QueriedElementCollection {
 
     /**
      * @param { Function } callback
+     * @returns { QueriedElementCollection }
      */
     keyup(callback) {
         this.on('keyup', callback);
@@ -127,6 +234,7 @@ class QueriedElementCollection {
 
     /**
      * @param { Function } callback
+     * @returns { QueriedElementCollection }
      */
     keydown(callback) {
         this.on('keydown', callback);
@@ -136,6 +244,7 @@ class QueriedElementCollection {
     /**
      * @param { String } event
      * @param { Function } callback
+     * @returns { QueriedElementCollection }
      */
     on(event, callback) {
         this.each((htmlElement) => htmlElement.on(event, callback));
@@ -145,6 +254,7 @@ class QueriedElementCollection {
     /**
      * @param { String } event
      * @param { Function } callback
+     * @returns { QueriedElementCollection }
      */
     addEventListener(event, callback) {
         return this.on(event, callback);
@@ -152,6 +262,7 @@ class QueriedElementCollection {
 
     /**
      * @param { String } className
+     * @returns { QueriedElementCollection }
      */
     removeClass(className) {
         this.each((htmlElement) => htmlElement.removeClass(className));
@@ -160,6 +271,7 @@ class QueriedElementCollection {
 
     /**
      * @param { String } className
+     * @returns { QueriedElementCollection }
      */
     addClass(className) {
         this.each((htmlElement) => htmlElement.addClass(className));
@@ -168,6 +280,7 @@ class QueriedElementCollection {
 
     /**
      * @param { String } className
+     * @returns { QueriedElementCollection }
      */
     toggleClass(className) {
         this.each((htmlElement) => htmlElement.toggleClass(className));
@@ -177,6 +290,7 @@ class QueriedElementCollection {
     /**
      * @param { String | Object } property
      * @param { String } value
+     * @returns { QueriedElementCollection }
      */
     css(property, value) {
         this.each((htmlElement) => htmlElement.css(property, value));
@@ -186,6 +300,7 @@ class QueriedElementCollection {
     /**
      * @param { String } attribute
      * @param { * } value
+     * @returns { QueriedElementCollection }
      */
     attr(attribute, value) {
         this.each((htmlElement) => htmlElement.attr(attribute, value));
@@ -195,6 +310,7 @@ class QueriedElementCollection {
     /**
      * @param { String } property
      * @param { * } value
+     * @returns { QueriedElementCollection }
      */
     prop(property, value) {
         this.each((htmlElement) => htmlElement.prop(property, value));
@@ -203,6 +319,7 @@ class QueriedElementCollection {
 
     /**
      * @param { * } value
+     * @returns { QueriedElementCollection }
      */
     val(value) {
         this.each((htmlElement) => htmlElement.val(value));
@@ -211,6 +328,7 @@ class QueriedElementCollection {
 
     /**
      * @param { * } value
+     * @returns { QueriedElementCollection }
      */
     value(value) {
         this.each((htmlElement) => htmlElement.value(value));
@@ -219,6 +337,7 @@ class QueriedElementCollection {
 
     /**
      * @param { String } html
+     * @returns { QueriedElementCollection }
      */
     html(html) {
         this.each((htmlElement) => htmlElement.html(html));
@@ -227,6 +346,7 @@ class QueriedElementCollection {
 
     /**
      * @param { String } text
+     * @returns { QueriedElementCollection }
      */
     text(text) {
         this.each((htmlElement) => htmlElement.text(text));
@@ -234,7 +354,8 @@ class QueriedElementCollection {
     }
 
     /**
-     * @param { String | HTMLElement } html
+     * @param { String | HTMLElement | QueriedElement } html
+     * @returns { QueriedElementCollection }
      */
     append(html) {
         this.each((htmlElement) => htmlElement.append(html));
@@ -243,6 +364,7 @@ class QueriedElementCollection {
 
     /**
      * @param { Number } timeout in milliseconds
+     * @returns { QueriedElementCollection }
      */
     hide(timeout = 0) {
         setTimeout(() => {
@@ -254,6 +376,7 @@ class QueriedElementCollection {
     /**
      * @param { Number } timeout in milliseconds
      * @param { String } display default: "block"
+     * @returns { QueriedElementCollection }
      */
     show(timeout = 0, display = 'block') {
         setTimeout(() => {
@@ -263,6 +386,7 @@ class QueriedElementCollection {
     }
 
     /**
+     * @returns { QueriedElementCollection }
      */
     select() {
         this.each((htmlElement) => htmlElement.select());
@@ -270,6 +394,7 @@ class QueriedElementCollection {
     }
 
     /**
+     * @returns { QueriedElementCollection }
      */
     focus() {
         this.each((htmlElement) => htmlElement.focus());
@@ -277,6 +402,7 @@ class QueriedElementCollection {
     }
 
     /**
+     * @returns { QueriedElementCollection }
      */
     selectAndFocus() {
         this.select();
@@ -285,6 +411,7 @@ class QueriedElementCollection {
     }
 
     /**
+     * @returns { QueriedElementCollection }
      */
     doNothing() {
         return this;
@@ -292,6 +419,7 @@ class QueriedElementCollection {
 
     /**
      * @param { Number } timeout in milliseconds
+     * @returns { Promise<QueriedElementCollection> }
      */
     async wait(timeout) {
         var queried = this;

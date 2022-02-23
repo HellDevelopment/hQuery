@@ -57,6 +57,7 @@ class QueriedElement {
 
     /**
      * @param { Function } callback
+     * @returns { QueriedElement }
      */
     ready(callback) {
         window.addEventListener('DOMContentLoaded', callback);
@@ -65,6 +66,7 @@ class QueriedElement {
 
     /**
      * @param { Function } callback
+     * @returns { QueriedElement }
      */
     load(callback) {
         window.addEventListener('load', callback);
@@ -73,6 +75,7 @@ class QueriedElement {
 
     /**
      * @param { Function } callback
+     * @returns { QueriedElement }
      */
     mouseover(callback) {
         this.on('mouseover', callback);
@@ -81,6 +84,7 @@ class QueriedElement {
 
     /**
      * @param { Function } callback
+     * @returns { QueriedElement }
      */
     mouseleave(callback) {
         this.on('mouseleave', callback);
@@ -89,6 +93,7 @@ class QueriedElement {
 
     /**
      * @param { Function } callback
+     * @returns { QueriedElement }
      */
     click(callback) {
         this.on('click', callback);
@@ -97,6 +102,7 @@ class QueriedElement {
 
     /**
      * @param { Function } callback
+     * @returns { QueriedElement }
      */
     keyup(callback) {
         this.on('keyup', callback);
@@ -105,6 +111,7 @@ class QueriedElement {
 
     /**
      * @param { Function } callback
+     * @returns { QueriedElement }
      */
     keydown(callback) {
         this.on('keydown', callback);
@@ -114,6 +121,7 @@ class QueriedElement {
     /**
      * @param { String } event
      * @param { Function } callback
+     * @returns { QueriedElement }
      */
     on(event, callback) {
         this.htmlElement.addEventListener(event, callback);
@@ -123,6 +131,7 @@ class QueriedElement {
     /**
      * @param { String } event
      * @param { Function } callback
+     * @returns { QueriedElement }
      */
     addEventListener(event, callback) {
         return this.on(event, callback);
@@ -130,6 +139,7 @@ class QueriedElement {
 
     /**
      * @param { String } className
+     * @returns { QueriedElement }
      */
     removeClass(className) {
         this.htmlElement.classList.remove(className);
@@ -138,6 +148,7 @@ class QueriedElement {
 
     /**
      * @param { String } className
+     * @returns { QueriedElement }
      */
     addClass(className) {
         this.htmlElement.classList.add(className);
@@ -146,6 +157,7 @@ class QueriedElement {
 
     /**
      * @param { String } className
+     * @returns { QueriedElement }
      */
     toggleClass(className) {
         this.htmlElement.classList.toggle(className);
@@ -155,6 +167,7 @@ class QueriedElement {
     /**
      * @param { String | Object } property
      * @param { String } value
+     * @returns { QueriedElement }
      */
     css(property, value) {
         function addProperty(element, prop, val) {
@@ -176,6 +189,7 @@ class QueriedElement {
     /**
      * @param { String } attribute
      * @param { * } value
+     * @returns { QueriedElement }
      */
     attr(attribute, value) {
         this.htmlElement.setAttribute(attribute, value);
@@ -185,6 +199,7 @@ class QueriedElement {
     /**
      * @param { String } property
      * @param { * } value
+     * @returns { QueriedElement }
      */
     prop(property, value) {
         this.htmlElement[property] = value;
@@ -193,6 +208,7 @@ class QueriedElement {
 
     /**
      * @param { * } value
+     * @returns { QueriedElement }
      */
     val(value) {
         return this.value(value);
@@ -200,6 +216,7 @@ class QueriedElement {
 
     /**
      * @param { * } value
+     * @returns { QueriedElement }
      */
     value(value) {
         this.htmlElement.value = value;
@@ -208,6 +225,7 @@ class QueriedElement {
 
     /**
      * @param { String } html
+     * @returns { QueriedElement }
      */
     html(html) {
         this.htmlElement.innerHTML = html;
@@ -216,6 +234,7 @@ class QueriedElement {
 
     /**
      * @param { String } text
+     * @returns { QueriedElement }
      */
     text(text) {
         this.htmlElement.innerText = text;
@@ -223,9 +242,14 @@ class QueriedElement {
     }
 
     /**
-     * @param { String | HTMLElement } html
+     * @param { String | HTMLElement | QueriedElement } html
+     * @returns { QueriedElement }
      */
     append(html) {
+        if (html instanceof QueriedElement) {
+            this.toHtmlElement().append(html.toHtmlElement());
+            return this;
+        }
         if (html instanceof HTMLElement) {
             this.toHtmlElement().append(html);
             return this;
@@ -236,6 +260,7 @@ class QueriedElement {
 
     /**
      * @param { Number } timeout in milliseconds
+     * @returns { QueriedElement }
      */
     hide(timeout = 0) {
         setTimeout(() => {
@@ -247,6 +272,7 @@ class QueriedElement {
     /**
      * @param { Number } timeout in milliseconds
      * @param { String } display default: "block"
+     * @returns { QueriedElement }
      */
     show(timeout = 0, display = 'block') {
         setTimeout(() => {
@@ -256,6 +282,7 @@ class QueriedElement {
     }
 
     /**
+     * @returns { QueriedElement }
      */
     select() {
         this.htmlElement.select();
@@ -263,6 +290,7 @@ class QueriedElement {
     }
 
     /**
+     * @returns { QueriedElement }
      */
     focus() {
         this.htmlElement.focus();
@@ -270,6 +298,7 @@ class QueriedElement {
     }
 
     /**
+     * @returns { QueriedElement }
      */
     selectAndFocus() {
         this.select();
@@ -278,6 +307,7 @@ class QueriedElement {
     }
 
     /**
+     * @returns { QueriedElement }
      */
     doNothing() {
         return this;
@@ -285,6 +315,7 @@ class QueriedElement {
 
     /**
      * @param { Number } timeout in milliseconds
+     * @returns { Promise<QueriedElement> }
      */
     async wait(timeout) {
         var queried = this;

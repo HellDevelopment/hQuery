@@ -2,7 +2,7 @@
  *
  * This file is part of the lucifer-morningstar.dev distribution (https://github.com/LuciferMorningstarDev or https://lucifer-morningstar.dev).
  *
- * hQuery v0.0.3 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
+ * hQuery v0.0.4 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -53,7 +53,7 @@
      *
      * This file is part of the lucifer-morningstar.dev distribution (https://github.com/LuciferMorningstarDev or https://lucifer-morningstar.dev).
      *
-     * hQuery v0.0.3 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
+     * hQuery v0.0.4 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
      *
      * This program is free software: you can redistribute it and/or modify
      * it under the terms of the GNU General Public License as published by
@@ -149,7 +149,7 @@
      *
      * This file is part of the lucifer-morningstar.dev distribution (https://github.com/LuciferMorningstarDev or https://lucifer-morningstar.dev).
      *
-     * hQuery v0.0.3 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
+     * hQuery v0.0.4 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
      *
      * This program is free software: you can redistribute it and/or modify
      * it under the terms of the GNU General Public License as published by
@@ -222,7 +222,7 @@
      *
      * This file is part of the lucifer-morningstar.dev distribution (https://github.com/LuciferMorningstarDev or https://lucifer-morningstar.dev).
      *
-     * hQuery v0.0.3 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
+     * hQuery v0.0.4 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
      *
      * This program is free software: you can redistribute it and/or modify
      * it under the terms of the GNU General Public License as published by
@@ -275,6 +275,7 @@
 
         /**
          * @param { Function } callback
+         * @returns { QueriedElement }
          */
         ready(callback) {
             window.addEventListener('DOMContentLoaded', callback);
@@ -283,6 +284,7 @@
 
         /**
          * @param { Function } callback
+         * @returns { QueriedElement }
          */
         load(callback) {
             window.addEventListener('load', callback);
@@ -291,6 +293,7 @@
 
         /**
          * @param { Function } callback
+         * @returns { QueriedElement }
          */
         mouseover(callback) {
             this.on('mouseover', callback);
@@ -299,6 +302,7 @@
 
         /**
          * @param { Function } callback
+         * @returns { QueriedElement }
          */
         mouseleave(callback) {
             this.on('mouseleave', callback);
@@ -307,6 +311,7 @@
 
         /**
          * @param { Function } callback
+         * @returns { QueriedElement }
          */
         click(callback) {
             this.on('click', callback);
@@ -315,6 +320,7 @@
 
         /**
          * @param { Function } callback
+         * @returns { QueriedElement }
          */
         keyup(callback) {
             this.on('keyup', callback);
@@ -323,6 +329,7 @@
 
         /**
          * @param { Function } callback
+         * @returns { QueriedElement }
          */
         keydown(callback) {
             this.on('keydown', callback);
@@ -332,6 +339,7 @@
         /**
          * @param { String } event
          * @param { Function } callback
+         * @returns { QueriedElement }
          */
         on(event, callback) {
             this.htmlElement.addEventListener(event, callback);
@@ -341,6 +349,7 @@
         /**
          * @param { String } event
          * @param { Function } callback
+         * @returns { QueriedElement }
          */
         addEventListener(event, callback) {
             return this.on(event, callback);
@@ -348,6 +357,7 @@
 
         /**
          * @param { String } className
+         * @returns { QueriedElement }
          */
         removeClass(className) {
             this.htmlElement.classList.remove(className);
@@ -356,6 +366,7 @@
 
         /**
          * @param { String } className
+         * @returns { QueriedElement }
          */
         addClass(className) {
             this.htmlElement.classList.add(className);
@@ -364,6 +375,7 @@
 
         /**
          * @param { String } className
+         * @returns { QueriedElement }
          */
         toggleClass(className) {
             this.htmlElement.classList.toggle(className);
@@ -373,6 +385,7 @@
         /**
          * @param { String | Object } property
          * @param { String } value
+         * @returns { QueriedElement }
          */
         css(property, value) {
             function addProperty(element, prop, val) {
@@ -394,6 +407,7 @@
         /**
          * @param { String } attribute
          * @param { * } value
+         * @returns { QueriedElement }
          */
         attr(attribute, value) {
             this.htmlElement.setAttribute(attribute, value);
@@ -403,6 +417,7 @@
         /**
          * @param { String } property
          * @param { * } value
+         * @returns { QueriedElement }
          */
         prop(property, value) {
             this.htmlElement[property] = value;
@@ -411,6 +426,7 @@
 
         /**
          * @param { * } value
+         * @returns { QueriedElement }
          */
         val(value) {
             return this.value(value);
@@ -418,6 +434,7 @@
 
         /**
          * @param { * } value
+         * @returns { QueriedElement }
          */
         value(value) {
             this.htmlElement.value = value;
@@ -426,6 +443,7 @@
 
         /**
          * @param { String } html
+         * @returns { QueriedElement }
          */
         html(html) {
             this.htmlElement.innerHTML = html;
@@ -434,6 +452,7 @@
 
         /**
          * @param { String } text
+         * @returns { QueriedElement }
          */
         text(text) {
             this.htmlElement.innerText = text;
@@ -441,9 +460,14 @@
         }
 
         /**
-         * @param { String | HTMLElement } html
+         * @param { String | HTMLElement | QueriedElement } html
+         * @returns { QueriedElement }
          */
         append(html) {
+            if (html instanceof QueriedElement) {
+                this.toHtmlElement().append(html.toHtmlElement());
+                return this;
+            }
             if (html instanceof HTMLElement) {
                 this.toHtmlElement().append(html);
                 return this;
@@ -454,6 +478,7 @@
 
         /**
          * @param { Number } timeout in milliseconds
+         * @returns { QueriedElement }
          */
         hide(timeout = 0) {
             setTimeout(() => {
@@ -465,6 +490,7 @@
         /**
          * @param { Number } timeout in milliseconds
          * @param { String } display default: "block"
+         * @returns { QueriedElement }
          */
         show(timeout = 0, display = 'block') {
             setTimeout(() => {
@@ -474,6 +500,7 @@
         }
 
         /**
+         * @returns { QueriedElement }
          */
         select() {
             this.htmlElement.select();
@@ -481,6 +508,7 @@
         }
 
         /**
+         * @returns { QueriedElement }
          */
         focus() {
             this.htmlElement.focus();
@@ -488,6 +516,7 @@
         }
 
         /**
+         * @returns { QueriedElement }
          */
         selectAndFocus() {
             this.select();
@@ -496,6 +525,7 @@
         }
 
         /**
+         * @returns { QueriedElement }
          */
         doNothing() {
             return this;
@@ -503,6 +533,7 @@
 
         /**
          * @param { Number } timeout in milliseconds
+         * @returns { Promise<QueriedElement> }
          */
         async wait(timeout) {
             var queried = this;
@@ -518,7 +549,7 @@
      *
      * This file is part of the lucifer-morningstar.dev distribution (https://github.com/LuciferMorningstarDev or https://lucifer-morningstar.dev).
      *
-     * hQuery v0.0.3 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
+     * hQuery v0.0.4 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
      *
      * This program is free software: you can redistribute it and/or modify
      * it under the terms of the GNU General Public License as published by
@@ -550,15 +581,24 @@
 
     class QueriedElementCollection {
         /**
-         * @param {QueriedElement | HTMLElement} elements
+         * @param {QueriedElement | HTMLElement | QueriedElementCollection } elements
          */
         constructor(...elements) {
             this.length = 0;
             for (let i = 0; i < elements.length; i += 1) {
-                this[i] = elements[i] instanceof QueriedElement ? elements[i] : new QueriedElement(elements[i]);
-                this.length++;
+                if (elements[i] instanceof QueriedElement) {
+                    this[i] = elements[i];
+                    this.length++;
+                } else if (elements[i] instanceof QueriedElementCollection) {
+                    elements[i].each((element) => {
+                        this[i] = element;
+                        this.length++;
+                    });
+                } else {
+                    this[i] = new QueriedElement(elements[i]);
+                    this.length++;
+                }
             }
-            Object.freeze(this);
         }
 
         /**
@@ -566,7 +606,7 @@
          * @returns { QueriedElement | Null }
          */
         get(index) {
-            return this[index];
+            return this[index] != null ? this[index] : null;
         }
 
         /**
@@ -590,7 +630,100 @@
         }
 
         /**
+         * @returns { Array<QueriedElement> }
+         */
+        array() {
+            let tmpArr = [];
+            for (let i = 0; i < this.length; i++) {
+                tmpArr.push(this[i]);
+            }
+            return tmpArr;
+        }
+
+        /**
+         * @param { HTMLElement | QueriedElement | QueriedElementCollection } elements
+         * @returns { QueriedElementCollection }
+         */
+        add(...elements) {
+            let indexAdd = 0;
+            elements.forEach((element) => {
+                if (element instanceof QueriedElementCollection) {
+                    for (let i = 0; i < element.length; i++) {
+                        this[this.length + indexAdd] = element[i];
+                        indexAdd++;
+                    }
+                } else if (element instanceof QueriedElement) {
+                    this[this.length + indexAdd] = element;
+                    indexAdd++;
+                } else {
+                    this[this.length + indexAdd] = new QueriedElement(element);
+                    indexAdd++;
+                }
+            });
+            this.length += indexAdd;
+            return this;
+        }
+
+        /**
+         * @param { QueriedElement } elements
+         * @returns { QueriedElementCollection }
+         */
+        remove(...elements) {
+            var tmpElements = this.array();
+            for (let i = 0; i < this.length; i++) {
+                delete this[i];
+            }
+            elements.forEach((el) => {
+                tmpElements.remove(el);
+            });
+            let index = 0;
+            tmpElements.forEach((element) => {
+                if (element != null) {
+                    this[index] = element;
+                    index++;
+                }
+            });
+            this.length = this[0] != null ? index + 1 : 0;
+            return this;
+        }
+
+        /**
          * @param { Function } callback
+         * @returns { QueriedElementCollection }
+         */
+        map(callback) {
+            return new QueriedElementCollection(...this.array().map(callback));
+        }
+
+        /**
+         * @param { Function } callback
+         * @returns { QueriedElementCollection }
+         */
+        filter(callback) {
+            return new QueriedElementCollection(...this.array().filter(callback));
+        }
+
+        /**
+         * @param { Function } callback
+         * @param { * } thisArg
+         * @returns { QueriedElementCollection }
+         */
+        some(callback, thisArg) {
+            return new QueriedElementCollection(...this.array().some(callback, thisArg));
+        }
+
+        /**
+         * @param { Function } callback
+         * @param { * } initialValue
+         * @returns { QueriedElementCollection }
+         */
+        reduce(callback, initialValue = 0) {
+            return new QueriedElementCollection(...this.array().reduce(callback, initialValue));
+        }
+
+        /**
+         * @param { Function } callback
+         * @returns { QueriedElementCollection }
          */
         ready(callback) {
             window.addEventListener('DOMContentLoaded', callback);
@@ -599,6 +732,7 @@
 
         /**
          * @param { Function } callback
+         * @returns { QueriedElementCollection }
          */
         load(callback) {
             window.addEventListener('load', callback);
@@ -607,6 +741,7 @@
 
         /**
          * @param { Function } callback
+         * @returns { QueriedElementCollection }
          */
         mouseover(callbackFunction) {
             this.each((htmlElement) => htmlElement.mouseover(callbackFunction));
@@ -615,6 +750,7 @@
 
         /**
          * @param { Function } callback
+         * @returns { QueriedElementCollection }
          */
         mouseleave(callbackFunction) {
             this.each((htmlElement) => htmlElement.mouseleave(callbackFunction));
@@ -623,6 +759,7 @@
 
         /**
          * @param { Function } callback
+         * @returns { QueriedElementCollection }
          */
         click(callback) {
             this.on('click', callback);
@@ -631,6 +768,7 @@
 
         /**
          * @param { Function } callback
+         * @returns { QueriedElementCollection }
          */
         keyup(callback) {
             this.on('keyup', callback);
@@ -639,6 +777,7 @@
 
         /**
          * @param { Function } callback
+         * @returns { QueriedElementCollection }
          */
         keydown(callback) {
             this.on('keydown', callback);
@@ -648,6 +787,7 @@
         /**
          * @param { String } event
          * @param { Function } callback
+         * @returns { QueriedElementCollection }
          */
         on(event, callback) {
             this.each((htmlElement) => htmlElement.on(event, callback));
@@ -657,6 +797,7 @@
         /**
          * @param { String } event
          * @param { Function } callback
+         * @returns { QueriedElementCollection }
          */
         addEventListener(event, callback) {
             return this.on(event, callback);
@@ -664,6 +805,7 @@
 
         /**
          * @param { String } className
+         * @returns { QueriedElementCollection }
          */
         removeClass(className) {
             this.each((htmlElement) => htmlElement.removeClass(className));
@@ -672,6 +814,7 @@
 
         /**
          * @param { String } className
+         * @returns { QueriedElementCollection }
          */
         addClass(className) {
             this.each((htmlElement) => htmlElement.addClass(className));
@@ -680,6 +823,7 @@
 
         /**
          * @param { String } className
+         * @returns { QueriedElementCollection }
          */
         toggleClass(className) {
             this.each((htmlElement) => htmlElement.toggleClass(className));
@@ -689,6 +833,7 @@
         /**
          * @param { String | Object } property
          * @param { String } value
+         * @returns { QueriedElementCollection }
          */
         css(property, value) {
             this.each((htmlElement) => htmlElement.css(property, value));
@@ -698,6 +843,7 @@
         /**
          * @param { String } attribute
          * @param { * } value
+         * @returns { QueriedElementCollection }
          */
         attr(attribute, value) {
             this.each((htmlElement) => htmlElement.attr(attribute, value));
@@ -707,6 +853,7 @@
         /**
          * @param { String } property
          * @param { * } value
+         * @returns { QueriedElementCollection }
          */
         prop(property, value) {
             this.each((htmlElement) => htmlElement.prop(property, value));
@@ -715,6 +862,7 @@
 
         /**
          * @param { * } value
+         * @returns { QueriedElementCollection }
          */
         val(value) {
             this.each((htmlElement) => htmlElement.val(value));
@@ -723,6 +871,7 @@
 
         /**
          * @param { * } value
+         * @returns { QueriedElementCollection }
          */
         value(value) {
             this.each((htmlElement) => htmlElement.value(value));
@@ -731,6 +880,7 @@
 
         /**
          * @param { String } html
+         * @returns { QueriedElementCollection }
          */
         html(html) {
             this.each((htmlElement) => htmlElement.html(html));
@@ -739,6 +889,7 @@
 
         /**
          * @param { String } text
+         * @returns { QueriedElementCollection }
          */
         text(text) {
             this.each((htmlElement) => htmlElement.text(text));
@@ -746,7 +897,8 @@
         }
 
         /**
-         * @param { String | HTMLElement } html
+         * @param { String | HTMLElement | QueriedElement } html
+         * @returns { QueriedElementCollection }
          */
         append(html) {
             this.each((htmlElement) => htmlElement.append(html));
@@ -755,6 +907,7 @@
 
         /**
          * @param { Number } timeout in milliseconds
+         * @returns { QueriedElementCollection }
          */
         hide(timeout = 0) {
             setTimeout(() => {
@@ -766,6 +919,7 @@
         /**
          * @param { Number } timeout in milliseconds
          * @param { String } display default: "block"
+         * @returns { QueriedElementCollection }
          */
         show(timeout = 0, display = 'block') {
             setTimeout(() => {
@@ -775,6 +929,7 @@
         }
 
         /**
+         * @returns { QueriedElementCollection }
          */
         select() {
             this.each((htmlElement) => htmlElement.select());
@@ -782,6 +937,7 @@
         }
 
         /**
+         * @returns { QueriedElementCollection }
          */
         focus() {
             this.each((htmlElement) => htmlElement.focus());
@@ -789,6 +945,7 @@
         }
 
         /**
+         * @returns { QueriedElementCollection }
          */
         selectAndFocus() {
             this.select();
@@ -797,6 +954,7 @@
         }
 
         /**
+         * @returns { QueriedElementCollection }
          */
         doNothing() {
             return this;
@@ -804,6 +962,7 @@
 
         /**
          * @param { Number } timeout in milliseconds
+         * @returns { Promise<QueriedElementCollection> }
          */
         async wait(timeout) {
             var queried = this;
@@ -819,7 +978,7 @@
      *
      * This file is part of the lucifer-morningstar.dev distribution (https://github.com/LuciferMorningstarDev or https://lucifer-morningstar.dev).
      *
-     * hQuery v0.0.3 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
+     * hQuery v0.0.4 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
      *
      * This program is free software: you can redistribute it and/or modify
      * it under the terms of the GNU General Public License as published by
