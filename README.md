@@ -1,6 +1,6 @@
 # hQuery - a lightweight JS-Framework
 
-## hQuery is a lightweight jQuery alternative
+## hQuery is a lightweight and fast jQuery alternative for DOM manipulation
 
 ---
 
