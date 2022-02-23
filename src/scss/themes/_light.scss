@@ -32,84 +32,28 @@
  *
  */
 
-.hquery-alerts {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 350px;
-    max-height: 100vh;
+.hquery-alert.light {
+    background-color: whitesmoke;
+    color: #111;
+    border-radius: 5px;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: right;
-
-    background-color: #1111;
-}
-
-.hquery-alert {
-    position: relative;
-    display: none;
-    margin: 3px;
-    padding: 10px 10px;
-    padding-top: 25px;
-
-    max-width: max(500px, 90vw);
-    max-height: max(500px, 70vh);
-
-    transition: display 0.5s;
-
-    * {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        text-decoration: none;
+    &.warning {
+        background-color: orange;
+        color: #111;
     }
 
-    h1 {
-        font-size: 22px;
-    }
-    h2 {
-        font-size: 21px;
-    }
-    h3 {
-        font-size: 20px;
+    &.success {
+        background-color: green;
+        color: #111;
     }
 
-    h4 {
-        font-size: 19px;
+    &.info {
+        background-color: blue;
+        color: #111;
     }
 
-    h5 {
-        font-size: 18px;
-    }
-
-    h6 {
-        font-size: 17px;
-    }
-
-    a,
-    p,
-    span,
-    button {
-        font-size: 16px;
-    }
-
-    .close {
-        position: absolute;
-        top: 0;
-        right: 0;
-        margin-right: 2px;
-        margin-top: 1px;
-        cursor: pointer;
-
-        &:hover {
-            opacity: 0.5;
-        }
+    &.error {
+        background-color: red;
+        color: #111;
     }
 }
-
-@import './themes/light';
-@import './themes/dark';
-@import './themes/glassmorphism-light';
-@import './themes/glassmorphism-dark';

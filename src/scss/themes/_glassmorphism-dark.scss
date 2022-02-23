@@ -1,0 +1,83 @@
+/**
+ *
+ * This file is part of the lucifer-morningstar.dev distribution (https://github.com/LuciferMorningstarDev or https://lucifer-morningstar.dev).
+ *
+ * hQuery | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
+ *
+ * Repository:
+ *
+ *     Github:          https://github.com/HellDevelopment/hQuery
+ *
+ * Contact:
+ *
+ *     Discord Server:  https://lucifer-morningstar.dev/discord
+ *     Website:         https://lucifer-morningstar.dev/
+ *     Mail:            contact@lucifer-morningstar.dev
+ *
+ *
+ * @author LuciferMorningstarDev < contact@lucifer-morningstar.dev | https://lucifer-morningstar.dev/ >
+ *
+ */
+
+.hquery-alert.glassmorphism-dark {
+    background: rgba(0, 0, 0, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: whitesmoke;
+
+    &.warning {
+        background: rgba(245, 166, 35, 0.7);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        border-radius: 5px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        color: #121212;
+    }
+
+    &.success {
+        background: rgba(65, 117, 5, 0.7);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        border-radius: 5px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        color: #121212;
+    }
+
+    &.info {
+        background: rgba(5, 37, 117, 0.7);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        border-radius: 5px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        color: #121212;
+    }
+
+    &.error {
+        background: rgba(208, 2, 27, 0.7);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        border-radius: 5px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        color: #121212;
+    }
+}

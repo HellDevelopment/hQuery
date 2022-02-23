@@ -38,6 +38,7 @@
 if (typeof window === 'undefined' || typeof document === 'undefined' || typeof window.document === 'undefined')
     throw new Error(`Missing scopes...  'window': ${typeof window !== 'undefined'} , 'window.document':  ${typeof window.document !== 'undefined'}, 'document':  ${typeof document !== 'undefined'}`);
 
+import Alert from './types/Alert.js';
 import AjaxPromise from './types/AjaxPromise.js';
 import QueriedElement from './types/QueriedElement.js';
 import QueriedElementCollection from './types/QueriedElementCollection.js';
@@ -80,7 +81,9 @@ function hQuery(...elementsOrFunctionOrSelector) {
         var selector = elementsOrFunctionOrSelector[0];
 
         if (isHTML(selector)) {
-            return new QueriedElement(document.createElement('div')).html(selector);
+            var tmpDiv = document.createElement('div');
+            tmpDiv.innerHTML = selector;
+            return new QueriedElement(tmpDiv.firstChild);
         }
 
         if (selector.startsWith('!')) {
@@ -135,6 +138,16 @@ hQuery.isFunction = (check) => typeof check === 'function';
  * @returns { Boolean } if the given to check variable is not null (check !== null && check !== undefined)
  */
 hQuery.isNotNull = (check) => check !== null && check !== undefined;
+
+/**
+ * @returns  { String } uuid in format xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+ */
+hQuery.randomUUID = () => {
+    var S4 = function () {
+        return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+    };
+    return S4() + S4() + '-' + S4() + '-' + S4() + '-' + S4() + '-' + S4() + S4() + S4();
+};
 
 /**
  * @param { String } url
@@ -269,6 +282,62 @@ hQuery.cookie = (name, value, days, path) => {
     expires = '; expires=' + date.toUTCString();
     document.cookie = encodeURIComponent(name) + '=' + encodeURIComponent(value) + expires + '; path=' + path != null ? path : '/';
     return value;
+};
+
+/**
+ * @param { String } type the type of the alert ( warning / success / info / primary / error )
+ * @param { String } text the text to show in the alert ( Can be HTML too )
+ * @param { String } theme the theme of the alert ( dark / light / glassmorphism-dark / glassmorphism-light )
+ * @returns { Promise<Alert> } a promise with the alert instance
+ */
+hQuery.alert = (type, text, theme) => {
+    let alert = new Alert(text, type);
+    return alert.alert(theme);
+};
+
+/**
+ * @param { String } text the text to show in the alert ( Can be HTML too )
+ * @param { String | Null } theme the theme of the alert ( dark / light / glassmorphism-dark / glassmorphism-light )
+ * @returns { Promise<Alert> } a promise with the alert instance
+ */
+hQuery.alert.success = (text, theme) => {
+    return hQuery.alert('success', text, theme);
+};
+
+/**
+ * @param { String } text the text to show in the alert ( Can be HTML too )
+ * @param { String | Null } theme the theme of the alert ( dark / light / glassmorphism-dark / glassmorphism-light )
+ * @returns { Promise<Alert> } a promise with the alert instance
+ */
+hQuery.alert.warning = (text, theme) => {
+    return hQuery.alert('warning', text, theme);
+};
+
+/**
+ * @param { String } text the text to show in the alert ( Can be HTML too )
+ * @param { String | Null } theme the theme of the alert ( dark / light / glassmorphism-dark / glassmorphism-light )
+ * @returns { Promise<Alert> } a promise with the alert instance
+ */
+hQuery.alert.primary = (text, theme) => {
+    return hQuery.alert('primary', text, theme);
+};
+
+/**
+ * @param { String } text the text to show in the alert ( Can be HTML too )
+ * @param { String | Null } theme the theme of the alert ( dark / light / glassmorphism-dark / glassmorphism-light )
+ * @returns { Promise<Alert> } a promise with the alert instance
+ */
+hQuery.alert.error = (text, theme) => {
+    return hQuery.alert('error', text, theme);
+};
+
+/**
+ * @param { String } text the text to show in the alert ( Can be HTML too )
+ * @param { String | Null } theme the theme of the alert ( dark / light / glassmorphism-dark / glassmorphism-light )
+ * @returns { Promise<Alert> } a promise with the alert instance
+ */
+hQuery.alert.info = (text, theme) => {
+    return hQuery.alert('info', text, theme);
 };
 
 export default hQuery;

@@ -2,7 +2,7 @@
  *
  * This file is part of the lucifer-morningstar.dev distribution (https://github.com/LuciferMorningstarDev or https://lucifer-morningstar.dev).
  *
- * hQuery v0.0.2 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
+ * hQuery v0.0.3 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -53,7 +53,103 @@
      *
      * This file is part of the lucifer-morningstar.dev distribution (https://github.com/LuciferMorningstarDev or https://lucifer-morningstar.dev).
      *
-     * hQuery v0.0.2 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
+     * hQuery v0.0.3 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
+     *
+     * This program is free software: you can redistribute it and/or modify
+     * it under the terms of the GNU General Public License as published by
+     * the Free Software Foundation, version 3.
+     *
+     * This program is distributed in the hope that it will be useful, but
+     * WITHOUT ANY WARRANTY; without even the implied warranty of
+     * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+     * General Public License for more details.
+     *
+     * You should have received a copy of the GNU General Public License
+     * along with this program. If not, see <http://www.gnu.org/licenses/>.
+     *
+     *
+     * Repository:
+     *
+     *     Github:          https://github.com/HellDevelopment/hQuery
+     *
+     * Contact:
+     *
+     *     Discord Server:  https://lucifer-morningstar.dev/discord
+     *     Website:         https://lucifer-morningstar.dev/
+     *     Mail:            contact@lucifer-morningstar.dev
+     *
+     *
+     * @author LuciferMorningstarDev < contact@lucifer-morningstar.dev | https://lucifer-morningstar.dev/ >
+     *
+     */
+
+    var alertContainer = null;
+
+    class Alert {
+        /**
+         * @param { String } type the type of the alert ( warning / success / info / primary / error )
+         * @param { String } text the text to show in the alert ( Can be HTML too )
+         */
+        constructor(text = '', type = 'primary') {
+            this.types = ['warning', 'success', 'info', 'primary', 'error'];
+            this.themes = ['dark', 'light', 'glassmorphism-dark', 'glassmorphism-light'];
+            if (!this.types.includes(type)) type = 'primary';
+            this.text = text;
+            this.type = type;
+            this.uuid = hQuery.randomUUID();
+        }
+
+        getText() {
+            return this.text;
+        }
+
+        getType() {
+            return this.type;
+        }
+
+        /**
+         * @param { String } theme the theme of the alert ( dark / light / glassmorphism-dark / glassmorphism-light )
+         * @returns { Promise<Alert> }
+         */
+        async alert(theme = 'glassmorphism-light') {
+            if (!this.themes.includes(theme)) theme = 'glassmorphism-light';
+            return new Promise((resolve, reject) => {
+                try {
+                    if (!alertContainer) {
+                        alertContainer = hQuery('<div class="hquery-alerts"></div>');
+                        document.body.append(alertContainer.toHtmlElement());
+                    }
+                    let element = hQuery(`<div id="${this.uuid}" class="hquery-alert ${theme} ${this.type}"></div>`).html(`<p>${this.text}</p>`);
+                    let close = hQuery(`<h4 id="${this.uuid}-close" class="close">&#x292B;</h4>`);
+                    element.append(close.toHtmlElement());
+                    alertContainer.toHtmlElement().append(element.toHtmlElement());
+                    element.show(10, 'block');
+                    var shown = true;
+                    let removeElement = () => {
+                        if (!shown) return;
+                        element.hide();
+                        element.toHtmlElement().parentElement.removeChild(element.toHtmlElement());
+                        if (alertContainer.toHtmlElement().firstChild == null) {
+                            alertContainer.toHtmlElement().parentElement.removeChild(alertContainer.toHtmlElement());
+                            alertContainer = null;
+                        }
+                        shown = false;
+                    };
+                    close.on('click', removeElement);
+                    setTimeout(removeElement, 10000);
+                    return resolve(this);
+                } catch (error) {
+                    return reject(error);
+                }
+            });
+        }
+    }
+
+    /**
+     *
+     * This file is part of the lucifer-morningstar.dev distribution (https://github.com/LuciferMorningstarDev or https://lucifer-morningstar.dev).
+     *
+     * hQuery v0.0.3 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
      *
      * This program is free software: you can redistribute it and/or modify
      * it under the terms of the GNU General Public License as published by
@@ -126,7 +222,7 @@
      *
      * This file is part of the lucifer-morningstar.dev distribution (https://github.com/LuciferMorningstarDev or https://lucifer-morningstar.dev).
      *
-     * hQuery v0.0.2 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
+     * hQuery v0.0.3 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
      *
      * This program is free software: you can redistribute it and/or modify
      * it under the terms of the GNU General Public License as published by
@@ -345,9 +441,13 @@
         }
 
         /**
-         * @param { String } html
+         * @param { String | HTMLElement } html
          */
         append(html) {
+            if (html instanceof HTMLElement) {
+                this.toHtmlElement().append(html);
+                return this;
+            }
             this.htmlElement.innerHTML += html;
             return this;
         }
@@ -418,7 +518,7 @@
      *
      * This file is part of the lucifer-morningstar.dev distribution (https://github.com/LuciferMorningstarDev or https://lucifer-morningstar.dev).
      *
-     * hQuery v0.0.2 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
+     * hQuery v0.0.3 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
      *
      * This program is free software: you can redistribute it and/or modify
      * it under the terms of the GNU General Public License as published by
@@ -646,7 +746,7 @@
         }
 
         /**
-         * @param { String } html
+         * @param { String | HTMLElement } html
          */
         append(html) {
             this.each((htmlElement) => htmlElement.append(html));
@@ -719,7 +819,7 @@
      *
      * This file is part of the lucifer-morningstar.dev distribution (https://github.com/LuciferMorningstarDev or https://lucifer-morningstar.dev).
      *
-     * hQuery v0.0.2 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
+     * hQuery v0.0.3 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
      *
      * This program is free software: you can redistribute it and/or modify
      * it under the terms of the GNU General Public License as published by
@@ -791,7 +891,9 @@
             var selector = elementsOrFunctionOrSelector[0];
 
             if (isHTML(selector)) {
-                return new QueriedElement(document.createElement('div')).html(selector);
+                var tmpDiv = document.createElement('div');
+                tmpDiv.innerHTML = selector;
+                return new QueriedElement(tmpDiv.firstChild);
             }
 
             if (selector.startsWith('!')) {
@@ -846,6 +948,16 @@
      * @returns { Boolean } if the given to check variable is not null (check !== null && check !== undefined)
      */
     hQuery.isNotNull = (check) => check !== null && check !== undefined;
+
+    /**
+     * @returns  { String } uuid in format xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+     */
+    hQuery.randomUUID = () => {
+        var S4 = function () {
+            return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+        };
+        return S4() + S4() + '-' + S4() + '-' + S4() + '-' + S4() + '-' + S4() + S4() + S4();
+    };
 
     /**
      * @param { String } url
@@ -980,6 +1092,62 @@
         expires = '; expires=' + date.toUTCString();
         document.cookie = encodeURIComponent(name) + '=' + encodeURIComponent(value) + expires + '; path=' + path != null ? path : '/';
         return value;
+    };
+
+    /**
+     * @param { String } type the type of the alert ( warning / success / info / primary / error )
+     * @param { String } text the text to show in the alert ( Can be HTML too )
+     * @param { String } theme the theme of the alert ( dark / light / glassmorphism-dark / glassmorphism-light )
+     * @returns { Promise<Alert> } a promise with the alert instance
+     */
+    hQuery.alert = (type, text, theme) => {
+        let alert = new Alert(text, type);
+        return alert.alert(theme);
+    };
+
+    /**
+     * @param { String } text the text to show in the alert ( Can be HTML too )
+     * @param { String | Null } theme the theme of the alert ( dark / light / glassmorphism-dark / glassmorphism-light )
+     * @returns { Promise<Alert> } a promise with the alert instance
+     */
+    hQuery.alert.success = (text, theme) => {
+        return hQuery.alert('success', text, theme);
+    };
+
+    /**
+     * @param { String } text the text to show in the alert ( Can be HTML too )
+     * @param { String | Null } theme the theme of the alert ( dark / light / glassmorphism-dark / glassmorphism-light )
+     * @returns { Promise<Alert> } a promise with the alert instance
+     */
+    hQuery.alert.warning = (text, theme) => {
+        return hQuery.alert('warning', text, theme);
+    };
+
+    /**
+     * @param { String } text the text to show in the alert ( Can be HTML too )
+     * @param { String | Null } theme the theme of the alert ( dark / light / glassmorphism-dark / glassmorphism-light )
+     * @returns { Promise<Alert> } a promise with the alert instance
+     */
+    hQuery.alert.primary = (text, theme) => {
+        return hQuery.alert('primary', text, theme);
+    };
+
+    /**
+     * @param { String } text the text to show in the alert ( Can be HTML too )
+     * @param { String | Null } theme the theme of the alert ( dark / light / glassmorphism-dark / glassmorphism-light )
+     * @returns { Promise<Alert> } a promise with the alert instance
+     */
+    hQuery.alert.error = (text, theme) => {
+        return hQuery.alert('error', text, theme);
+    };
+
+    /**
+     * @param { String } text the text to show in the alert ( Can be HTML too )
+     * @param { String | Null } theme the theme of the alert ( dark / light / glassmorphism-dark / glassmorphism-light )
+     * @returns { Promise<Alert> } a promise with the alert instance
+     */
+    hQuery.alert.info = (text, theme) => {
+        return hQuery.alert('info', text, theme);
     };
 
     window['$'] = hQuery;

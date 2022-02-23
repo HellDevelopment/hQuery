@@ -31,8 +31,337 @@
  * @author LuciferMorningstarDev < contact@lucifer-morningstar.dev | https://lucifer-morningstar.dev/ >
  *
  */
-div {
-    color: red;
+.hquery-alerts {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 350px;
+    max-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: right;
+    background-color: #1111;
+}
+
+.hquery-alert {
+    position: relative;
+    display: none;
+    margin: 3px;
+    padding: 10px 10px;
+    padding-top: 25px;
+    max-width: max(500px, 90vw);
+    max-height: max(500px, 70vh);
+    transition: display 0.5s;
+}
+.hquery-alert * {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+}
+.hquery-alert h1 {
+    font-size: 22px;
+}
+.hquery-alert h2 {
+    font-size: 21px;
+}
+.hquery-alert h3 {
+    font-size: 20px;
+}
+.hquery-alert h4 {
+    font-size: 19px;
+}
+.hquery-alert h5 {
+    font-size: 18px;
+}
+.hquery-alert h6 {
+    font-size: 17px;
+}
+.hquery-alert a,
+.hquery-alert p,
+.hquery-alert span,
+.hquery-alert button {
+    font-size: 16px;
+}
+.hquery-alert .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 2px;
+    margin-top: 1px;
+    cursor: pointer;
+}
+.hquery-alert .close:hover {
+    opacity: 0.5;
+}
+
+/**
+ *
+ * This file is part of the lucifer-morningstar.dev distribution (https://github.com/LuciferMorningstarDev or https://lucifer-morningstar.dev).
+ *
+ * hQuery | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
+ *
+ * Repository:
+ *
+ *     Github:          https://github.com/HellDevelopment/hQuery
+ *
+ * Contact:
+ *
+ *     Discord Server:  https://lucifer-morningstar.dev/discord
+ *     Website:         https://lucifer-morningstar.dev/
+ *     Mail:            contact@lucifer-morningstar.dev
+ *
+ *
+ * @author LuciferMorningstarDev < contact@lucifer-morningstar.dev | https://lucifer-morningstar.dev/ >
+ *
+ */
+.hquery-alert.light {
+    background-color: whitesmoke;
+    color: #111;
+    border-radius: 5px;
+}
+.hquery-alert.light.warning {
+    background-color: orange;
+    color: #111;
+}
+.hquery-alert.light.success {
+    background-color: green;
+    color: #111;
+}
+.hquery-alert.light.info {
+    background-color: blue;
+    color: #111;
+}
+.hquery-alert.light.error {
+    background-color: red;
+    color: #111;
+}
+
+/**
+ *
+ * This file is part of the lucifer-morningstar.dev distribution (https://github.com/LuciferMorningstarDev or https://lucifer-morningstar.dev).
+ *
+ * hQuery | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
+ *
+ * Repository:
+ *
+ *     Github:          https://github.com/HellDevelopment/hQuery
+ *
+ * Contact:
+ *
+ *     Discord Server:  https://lucifer-morningstar.dev/discord
+ *     Website:         https://lucifer-morningstar.dev/
+ *     Mail:            contact@lucifer-morningstar.dev
+ *
+ *
+ * @author LuciferMorningstarDev < contact@lucifer-morningstar.dev | https://lucifer-morningstar.dev/ >
+ *
+ */
+.hquery-alert.dark {
+    background-color: #111;
+    color: whitesmoke;
+    border-radius: 5px;
+}
+.hquery-alert.dark.warning {
+    background-color: darkorange;
+    color: whitesmoke;
+}
+.hquery-alert.dark.success {
+    background-color: darkgreen;
+    color: whitesmoke;
+}
+.hquery-alert.dark.info {
+    background-color: darkblue;
+    color: whitesmoke;
+}
+.hquery-alert.dark.error {
+    background-color: darkred;
+    color: whitesmoke;
+}
+
+/**
+ *
+ * This file is part of the lucifer-morningstar.dev distribution (https://github.com/LuciferMorningstarDev or https://lucifer-morningstar.dev).
+ *
+ * hQuery | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
+ *
+ * Repository:
+ *
+ *     Github:          https://github.com/HellDevelopment/hQuery
+ *
+ * Contact:
+ *
+ *     Discord Server:  https://lucifer-morningstar.dev/discord
+ *     Website:         https://lucifer-morningstar.dev/
+ *     Mail:            contact@lucifer-morningstar.dev
+ *
+ *
+ * @author LuciferMorningstarDev < contact@lucifer-morningstar.dev | https://lucifer-morningstar.dev/ >
+ *
+ */
+.hquery-alert.glassmorphism-light {
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #121212;
+}
+.hquery-alert.glassmorphism-light.warning {
+    background: rgba(245, 166, 35, 0.5);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #121212;
+}
+.hquery-alert.glassmorphism-light.success {
+    background: rgba(65, 117, 5, 0.5);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #121212;
+}
+.hquery-alert.glassmorphism-light.info {
+    background: rgba(5, 37, 117, 0.5);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #121212;
+}
+.hquery-alert.glassmorphism-light.error {
+    background: rgba(208, 2, 27, 0.5);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #121212;
+}
+
+/**
+ *
+ * This file is part of the lucifer-morningstar.dev distribution (https://github.com/LuciferMorningstarDev or https://lucifer-morningstar.dev).
+ *
+ * hQuery | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
+ *
+ * Repository:
+ *
+ *     Github:          https://github.com/HellDevelopment/hQuery
+ *
+ * Contact:
+ *
+ *     Discord Server:  https://lucifer-morningstar.dev/discord
+ *     Website:         https://lucifer-morningstar.dev/
+ *     Mail:            contact@lucifer-morningstar.dev
+ *
+ *
+ * @author LuciferMorningstarDev < contact@lucifer-morningstar.dev | https://lucifer-morningstar.dev/ >
+ *
+ */
+.hquery-alert.glassmorphism-dark {
+    background: rgba(0, 0, 0, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: whitesmoke;
+}
+.hquery-alert.glassmorphism-dark.warning {
+    background: rgba(245, 166, 35, 0.7);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #121212;
+}
+.hquery-alert.glassmorphism-dark.success {
+    background: rgba(65, 117, 5, 0.7);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #121212;
+}
+.hquery-alert.glassmorphism-dark.info {
+    background: rgba(5, 37, 117, 0.7);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #121212;
+}
+.hquery-alert.glassmorphism-dark.error {
+    background: rgba(208, 2, 27, 0.7);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #121212;
 }
 
 /*# sourceMappingURL=alert.css.map */

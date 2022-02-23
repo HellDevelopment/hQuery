@@ -138,6 +138,21 @@ $(async () => {
 
     console.log('============================= TESTING ELEMENT MANIPULATION =============================');
 
+    let sleep = async (ms) => {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+    };
+    setInterval(async () => {
+        $.alert.info('This is a info alert This is a info alert This is a info alert This is a info alert This is a info alert This is a info alert');
+        await sleep(300);
+        $.alert.success('This is a success alert');
+        await sleep(300);
+        $.alert.warning('This is a warning alert This is a warning alert This is a warning alert This is a warning alert');
+        await sleep(300);
+        $.alert.error('This is a error alert This is a error alert This is a error alert');
+        await sleep(300);
+        $.alert.primary('This is a primary alert');
+    }, 15000);
+
     console.log('Tests done...');
     console.log('========================================================================================');
 });

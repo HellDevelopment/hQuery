@@ -234,7 +234,7 @@ class QueriedElementCollection {
     }
 
     /**
-     * @param { String } html
+     * @param { String | HTMLElement } html
      */
     append(html) {
         this.each((htmlElement) => htmlElement.append(html));

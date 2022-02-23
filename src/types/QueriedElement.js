@@ -223,9 +223,13 @@ class QueriedElement {
     }
 
     /**
-     * @param { String } html
+     * @param { String | HTMLElement } html
      */
     append(html) {
+        if (html instanceof HTMLElement) {
+            this.toHtmlElement().append(html);
+            return this;
+        }
         this.htmlElement.innerHTML += html;
         return this;
     }
