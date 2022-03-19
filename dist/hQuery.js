@@ -2,7 +2,7 @@
  *
  * This file is part of the lucifer-morningstar.dev distribution (https://github.com/LuciferMorningstarDev or https://lucifer-morningstar.dev).
  *
- * hQuery v0.0.5 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
+ * hQuery v0.0.6 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -53,7 +53,7 @@
      *
      * This file is part of the lucifer-morningstar.dev distribution (https://github.com/LuciferMorningstarDev or https://lucifer-morningstar.dev).
      *
-     * hQuery v0.0.5 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
+     * hQuery v0.0.6 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
      *
      * This program is free software: you can redistribute it and/or modify
      * it under the terms of the GNU General Public License as published by
@@ -149,7 +149,7 @@
      *
      * This file is part of the lucifer-morningstar.dev distribution (https://github.com/LuciferMorningstarDev or https://lucifer-morningstar.dev).
      *
-     * hQuery v0.0.5 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
+     * hQuery v0.0.6 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
      *
      * This program is free software: you can redistribute it and/or modify
      * it under the terms of the GNU General Public License as published by
@@ -222,7 +222,7 @@
      *
      * This file is part of the lucifer-morningstar.dev distribution (https://github.com/LuciferMorningstarDev or https://lucifer-morningstar.dev).
      *
-     * hQuery v0.0.5 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
+     * hQuery v0.0.6 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
      *
      * This program is free software: you can redistribute it and/or modify
      * it under the terms of the GNU General Public License as published by
@@ -549,7 +549,7 @@
      *
      * This file is part of the lucifer-morningstar.dev distribution (https://github.com/LuciferMorningstarDev or https://lucifer-morningstar.dev).
      *
-     * hQuery v0.0.5 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
+     * hQuery v0.0.6 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
      *
      * This program is free software: you can redistribute it and/or modify
      * it under the terms of the GNU General Public License as published by
@@ -978,7 +978,7 @@
      *
      * This file is part of the lucifer-morningstar.dev distribution (https://github.com/LuciferMorningstarDev or https://lucifer-morningstar.dev).
      *
-     * hQuery v0.0.5 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
+     * hQuery v0.0.6 | Copyright (c) 2022 | lucifer-morningstar.dev | All Rights Reserved
      *
      * This program is free software: you can redistribute it and/or modify
      * it under the terms of the GNU General Public License as published by
@@ -1246,7 +1246,7 @@
         if (!days) return hQuery.cookie(name, value, 365 * 5, path);
 
         var expires;
-        var date = new Date(Date.vow() + days * 24 * 60 * 60 * 1000);
+        var date = new Date(Date.now() + days * 24 * 60 * 60 * 1000);
         date.setTime();
         expires = '; expires=' + date.toUTCString();
         document.cookie = encodeURIComponent(name) + '=' + encodeURIComponent(value) + expires + '; path=' + path != null ? path : '/';

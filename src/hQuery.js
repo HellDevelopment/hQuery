@@ -277,7 +277,7 @@ hQuery.cookie = (name, value, days, path) => {
     if (!days) return hQuery.cookie(name, value, 365 * 5, path);
 
     var expires;
-    var date = new Date(Date.vow() + days * 24 * 60 * 60 * 1000);
+    var date = new Date(Date.now() + days * 24 * 60 * 60 * 1000);
     date.setTime();
     expires = '; expires=' + date.toUTCString();
     document.cookie = encodeURIComponent(name) + '=' + encodeURIComponent(value) + expires + '; path=' + path != null ? path : '/';
